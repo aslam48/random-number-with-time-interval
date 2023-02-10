@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [randomNumber, setRandomNumber] = useState();
+  const [disableBtn, setDisableBtn] = useState(false);
+
+  const n = 4
+  const generateRandomNumber = () => {
+    setRandomNumber(Math.floor(Math.pow(10 , n -1 ) + Math.random() * (Math.pow(10, n)- Math.pow(10, n -1) -1) ));
+
+    setDisableBtn(true)
+
+    setTimeout(() => {
+      setDisableBtn(false)
+    },2 * 60 * 1000)
+  };
+
+  
+
+  // useEffect(() {
+
+  // },[counter, randomNumber])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Random Number: {randomNumber}</h1>
+      <button onClick={generateRandomNumber} disabled={disableBtn} >Generate Random Number</button>
     </div>
   );
 }
